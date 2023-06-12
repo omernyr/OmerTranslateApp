@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		520497A42A371F4100F6E110 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 520497A32A371F4100F6E110 /* MessageKit */; };
 		5256B4562A34BC9500CB1927 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5256B4552A34BC9500CB1927 /* AppDelegate.swift */; };
 		5256B4582A34BC9500CB1927 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5256B4572A34BC9500CB1927 /* SceneDelegate.swift */; };
 		5256B45A2A34BC9500CB1927 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5256B4592A34BC9500CB1927 /* ViewController.swift */; };
@@ -15,6 +16,7 @@
 		5256B4622A34BC9600CB1927 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5256B4602A34BC9600CB1927 /* LaunchScreen.storyboard */; };
 		5256B46B2A34BD0400CB1927 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5256B46A2A34BD0400CB1927 /* SnapKit */; };
 		5256B46E2A34BD1900CB1927 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5256B46D2A34BD1900CB1927 /* Extension+UIView.swift */; };
+		525CD0532A37451400B9EEA1 /* NewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525CD0522A37451400B9EEA1 /* NewViewController.swift */; };
 		5282EC382A3619B5000F8B23 /* Gilroy-UltraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5282EC212A3619B5000F8B23 /* Gilroy-UltraLightItalic.ttf */; };
 		5282EC392A3619B5000F8B23 /* Gilroy-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5282EC222A3619B5000F8B23 /* Gilroy-Medium.ttf */; };
 		5282EC3A2A3619B5000F8B23 /* Gilroy-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5282EC232A3619B5000F8B23 /* Gilroy-LightItalic.ttf */; };
@@ -53,6 +55,7 @@
 		5256B4612A34BC9600CB1927 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5256B4632A34BC9600CB1927 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5256B46D2A34BD1900CB1927 /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
+		525CD0522A37451400B9EEA1 /* NewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewViewController.swift; sourceTree = "<group>"; };
 		5282EC212A3619B5000F8B23 /* Gilroy-UltraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-UltraLightItalic.ttf"; sourceTree = "<group>"; };
 		5282EC222A3619B5000F8B23 /* Gilroy-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-Medium.ttf"; sourceTree = "<group>"; };
 		5282EC232A3619B5000F8B23 /* Gilroy-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-LightItalic.ttf"; sourceTree = "<group>"; };
@@ -87,6 +90,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5256B46B2A34BD0400CB1927 /* SnapKit in Frameworks */,
+				520497A42A371F4100F6E110 /* MessageKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,6 +127,7 @@
 				5256B45E2A34BC9600CB1927 /* Assets.xcassets */,
 				5256B4602A34BC9600CB1927 /* LaunchScreen.storyboard */,
 				5256B4632A34BC9600CB1927 /* Info.plist */,
+				525CD0522A37451400B9EEA1 /* NewViewController.swift */,
 			);
 			path = OmerTranslateApp;
 			sourceTree = "<group>";
@@ -200,6 +205,7 @@
 			name = OmerTranslateApp;
 			packageProductDependencies = (
 				5256B46A2A34BD0400CB1927 /* SnapKit */,
+				520497A32A371F4100F6E110 /* MessageKit */,
 			);
 			productName = OmerTranslateApp;
 			productReference = 5256B4522A34BC9500CB1927 /* OmerTranslateApp.app */;
@@ -231,6 +237,7 @@
 			mainGroup = 5256B4492A34BC9500CB1927;
 			packageReferences = (
 				5256B4692A34BD0400CB1927 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				520497A22A371F4100F6E110 /* XCRemoteSwiftPackageReference "MessageKit" */,
 			);
 			productRefGroup = 5256B4532A34BC9500CB1927 /* Products */;
 			projectDirPath = "";
@@ -285,6 +292,7 @@
 				5256B45A2A34BC9500CB1927 /* ViewController.swift in Sources */,
 				5256B4562A34BC9500CB1927 /* AppDelegate.swift in Sources */,
 				5282EC532A3631F2000F8B23 /* ConversationViewController.swift in Sources */,
+				525CD0532A37451400B9EEA1 /* NewViewController.swift in Sources */,
 				5256B46E2A34BD1900CB1927 /* Extension+UIView.swift in Sources */,
 				5282EC562A36375C000F8B23 /* NetworkConstant.swift in Sources */,
 				5256B4582A34BC9500CB1927 /* SceneDelegate.swift in Sources */,
@@ -516,6 +524,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		520497A22A371F4100F6E110 /* XCRemoteSwiftPackageReference "MessageKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MessageKit/MessageKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		5256B4692A34BD0400CB1927 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -527,6 +543,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		520497A32A371F4100F6E110 /* MessageKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 520497A22A371F4100F6E110 /* XCRemoteSwiftPackageReference "MessageKit" */;
+			productName = MessageKit;
+		};
 		5256B46A2A34BD0400CB1927 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5256B4692A34BD0400CB1927 /* XCRemoteSwiftPackageReference "SnapKit" */;
