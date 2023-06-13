@@ -96,11 +96,8 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     private lazy var libraryImageButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "person.line.dotted.person.fill"), for: .normal)
-        button.contentMode = .scaleAspectFit
-        button.tintColor = .white
+        button.buildButton(contentMode: .scaleAspectFit, tintColor: .white, cornerRadius: 40.0, imageViewString: "person.line.dotted.person.fill")
         button.backgroundColor = UIColor(hexString: "A2D2FF")
-        button.layer.cornerRadius = 40.0
         button.setPreferredSymbolConfiguration(.init(pointSize: 20.0, weight: .bold), forImageIn: .normal)
         button.addTarget(self, action: #selector(goToConversVC), for: .touchUpInside)
         return button
@@ -108,41 +105,33 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     private lazy var cameraImageButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "camera"), for: .normal)
+        button.buildButton(contentMode: .scaleAspectFit, tintColor: .white, cornerRadius: 40.0, imageViewString: "camera")
         button.addTarget(self, action: #selector(openCamera), for: .touchUpInside)
-        button.contentMode = .scaleAspectFit
-        button.tintColor = .white
         button.backgroundColor = UIColor(hexString: "9685FF")
-        button.layer.cornerRadius = 40.0
         button.setPreferredSymbolConfiguration(.init(pointSize: 20.0, weight: .bold), forImageIn: .normal)
         return button
     }()
     
     private lazy var microphoneButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "mic.fill"), for: .normal)
+        button.buildButton(contentMode: .scaleAspectFit, tintColor: .white, cornerRadius: 55.0, imageViewString: "mic.fill")
         button.addTarget(self, action: #selector(microphoneButtonTouchDown), for: .touchDown)
         button.addTarget(self, action: #selector(microphoneButtonTouchUp), for: .touchUpInside)
-        button.contentMode = .scaleAspectFit
-        button.tintColor = .white
         button.backgroundColor = UIColor(hexString: "FF865E")
-        button.layer.cornerRadius = 55.0
         button.setPreferredSymbolConfiguration(.init(pointSize: 20.0, weight: .bold), forImageIn: .normal)
         return button
     }()
 
     private lazy var copyPastebutton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "rectangle.portrait.on.rectangle.portrait"), for: .normal)
-        button.tintColor = .black
+        button.buildButton(contentMode: .scaleAspectFit, tintColor: .black, cornerRadius: nil, imageViewString: "rectangle.portrait.on.rectangle.portrait")
         button.addTarget(self, action: #selector(copyText), for: .touchUpInside)
         return button
     }()
     
     @objc private lazy var editButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "square.and.pencil"), for: .normal)
-        button.tintColor = .black
+        button.buildButton(contentMode: nil, tintColor: .black, cornerRadius: nil, imageViewString: "square.and.pencil")
         button.addTarget(self, action: #selector(editResult), for: .touchUpInside)
         return button
     }()
@@ -170,13 +159,11 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     private let translateButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "arrow.up.arrow.down"), for: .normal)
+        button.buildButton(contentMode: .scaleToFill, tintColor: .secondaryLabel, cornerRadius: nil, imageViewString: "arrow.up.arrow.down")
         button.setTitle("Translate to", for: .normal)
         button.backgroundColor = .clear
-        button.tintColor = .secondaryLabel
         button.setTitleColor(.secondaryLabel, for: .normal)
         button.titleLabel?.font = UIFont(name: "Gilroy-Medium", size: 15.0) // Yazı boyutunu küçültmek için
-        button.imageView?.contentMode = .scaleToFill // İkon boyutunu küçültmek için
         return button
     }()
     
