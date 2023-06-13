@@ -10,7 +10,7 @@ import Foundation
 
 class APICaller {
     
-    func translateText(text: String, targetLanguage: String, completion: @escaping (String?, Error?) -> Void) {
+    func translateText(text: String, fromLanguage: String, targetLanguage: String, completion: @escaping (String?, Error?) -> Void) {
         let headers = [
             "content-type": "application/json",
             "X-RapidAPI-Key": "fe83b38e34mshc8c70c0d52b8a61p1ac627jsnbdb546853370",
@@ -24,8 +24,8 @@ class APICaller {
             return
         }
         
-        let urlString = "https://microsoft-translator-text.p.rapidapi.com/translate?to%5B0%5D=\(targetLanguage)&api-version=3.0&profanityAction=NoAction&textType=plain"
-        
+        let urlString = "https://microsoft-translator-text.p.rapidapi.com/translate?to%5B0%5D=\(targetLanguage)&api-version=3.0&from=\(fromLanguage)&profanityAction=NoAction&textType=plain"
+                        
         guard let url = URL(string: urlString) else {
             completion(nil, NSError(domain: "TranslationError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid request URL."]))
             return

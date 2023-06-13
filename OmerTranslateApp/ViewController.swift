@@ -266,7 +266,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
                 
                 self.resultTextView.text = speechResultText
                 
-                APICaller().translateText(text: speechResultText, targetLanguage: "tr") { translatedText, error in
+                APICaller().translateText(text: speechResultText, fromLanguage: "en", targetLanguage: "tr") { translatedText, error in
                     if let error = error {
                         print("Çeviri hatası: \(error.localizedDescription)")
                     } else if let translatedText = translatedText {
@@ -531,7 +531,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
                 self.showTextLetterByLetter(text: text)
                 print("İngilizce -->> \(text)")
                 
-                APICaller().translateText(text: "\(text)", targetLanguage: "tr") { (translatedText, error) in
+                APICaller().translateText(text: "\(text)", fromLanguage: "en", targetLanguage: "tr") { (translatedText, error) in
                     if let error = error {
                         print("Çeviri hatası: \(error.localizedDescription)")
                     } else if let translatedText = translatedText {
@@ -598,7 +598,7 @@ extension ViewController: UITextViewDelegate {
         
         guard let text = textView.text else { return }
         
-        APICaller().translateText(text: text, targetLanguage: "tr") { translatedText, error in
+        APICaller().translateText(text: text, fromLanguage: "en", targetLanguage: "tr") { translatedText, error in
             if let error = error {
                 print("Çeviri hatası: \(error.localizedDescription)")
             } else if let translatedText = translatedText {

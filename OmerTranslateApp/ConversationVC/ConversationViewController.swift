@@ -34,7 +34,6 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
     
     var messages: [MessageType] = []
     
-    
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US")) // Konuşma tanıma için kullanılacak dile göre ayarlayın
     private let audioEngine = AVAudioEngine()
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
@@ -84,9 +83,6 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
     private func setupUI() {
         
         messageInputBar.isHidden = true
-        messagesCollectionView.contentInset.bottom = 0
-        messagesCollectionView.verticalScrollIndicatorInsets.bottom = 0
-        
         messages.append(Message(sender: currentUser, messageId: "1", sentDate: Date(), kind: .text("How are you?")))
         messages.append(Message(sender: otherUser, messageId: "2", sentDate: Date(), kind: .text("Noldu?")))
         messages.append(Message(sender: currentUser, messageId: "3", sentDate: Date(), kind: .text("Nasılsın")))
@@ -123,6 +119,12 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
             make.height.equalTo(50.0)
             make.bottom.equalTo(rightMicrophoneButton.snp.top).offset(-20.0)
             make.centerX.equalToSuperview()
+        }
+        
+        messagesCollectionView.snp.makeConstraints { make in
+            make.width.equalToSuperview()
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-250.0)
         }
     }
     
@@ -195,26 +197,21 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
             var isFinal = false
             
             if let result = result {
-                
                 let speechResultText = result.bestTranscription.formattedString
                 
                 self.newLabel.text = speechResultText
-                self.messageString = speechResultText
+//                self.messageString = speechResultText
                 
                 
-                APICaller().translateText(text: speechResultText, targetLanguage: "tr") { translatedText, error in
+                
+                APICaller().translateText(text: speechResultText, fromLanguage: "en", targetLanguage: "tr") { translatedText, error in
                     if let error = error {
                         print("Çeviri hatası: \(error.localizedDescription)")
                     } else if let translatedText = translatedText {
-                        DispatchQueue.main.async {
-//                            self.showTextLetterByLetter(text: translatedText)
-//                            self.convertedTextView.text = translatedText
-                            // TODO: copy - paste
-                            
-//                            self.string = translatedText
-                            // UIPasteboard.general.string = translatedText
-                        }
                         
+                        DispatchQueue.main.async {
+                            self.messageString = translatedText
+                        }
                         print("Çeviri sonucu: \(translatedText)")
                     }
                 }
@@ -288,5 +285,6 @@ extension ConversationViewController: MessagesDisplayDelegate {
             return .white
         }
     }
+    
 }
 
