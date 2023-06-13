@@ -24,10 +24,13 @@ import MessageKit
 //    public let displayName: String
 //}
 
+
 class ConversationViewController: MessagesViewController, MessagesLayoutDelegate {
     
-    let sender = Sender(senderId: "any_unique_id", displayName: "Steven")
-    let sender2 = Sender(senderId: "any_unique_id2", displayName: "Ali")
+    var messageString = ""
+    
+    let currentUser = Sender(senderId: "any_unique_id", displayName: "Steven")
+    let otherUser = Sender(senderId: "any_unique_id2", displayName: "Ali")
     
     var messages: [MessageType] = []
     
@@ -40,26 +43,20 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
     
     private lazy var leftMicrophoneButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "mic.fill"), for: .normal)
-        button.addTarget(self, action: #selector(microphoneButtonTouchDown), for: .touchDown)
-        button.addTarget(self, action: #selector(microphoneButtonTouchUp), for: .touchUpInside)
-        button.contentMode = .scaleAspectFit
-        button.tintColor = .white
+        button.buildButton(contentMode: .scaleAspectFit, tintColor: .white, cornerRadius: 40.0, imageViewString: "mic.fill")
+        button.addTarget(self, action: #selector(leftMicrophoneButtonTouchDown), for: .touchDown)
+        button.addTarget(self, action: #selector(leftMicrophoneButtonTouchUp), for: .touchUpInside)
         button.backgroundColor = UIColor(hexString: "FF865E")
-        button.layer.cornerRadius = 40.0
         button.setPreferredSymbolConfiguration(.init(pointSize: 20.0, weight: .bold), forImageIn: .normal)
         return button
     }()
     
     private lazy var rightMicrophoneButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "mic.fill"), for: .normal)
-        button.addTarget(self, action: #selector(microphoneButtonTouchDown), for: .touchDown)
-        button.addTarget(self, action: #selector(microphoneButtonTouchUp), for: .touchUpInside)
-        button.contentMode = .scaleAspectFit
-        button.tintColor = .white
+        button.buildButton(contentMode: .scaleAspectFit, tintColor: .white, cornerRadius: 40.0, imageViewString: "mic.fill")
+        button.addTarget(self, action: #selector(rightMicrophoneButtonTouchDown), for: .touchDown)
+        button.addTarget(self, action: #selector(rightMicrophoneButtonTouchUp), for: .touchUpInside)
         button.backgroundColor = UIColor(hexString: "9685FF")
-        button.layer.cornerRadius = 40.0
         button.setPreferredSymbolConfiguration(.init(pointSize: 20.0, weight: .bold), forImageIn: .normal)
         return button
     }()
@@ -86,15 +83,14 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
     
     private func setupUI() {
         
-        
         messageInputBar.isHidden = true
         messagesCollectionView.contentInset.bottom = 0
         messagesCollectionView.verticalScrollIndicatorInsets.bottom = 0
         
-        messages.append(Message(sender: sender, messageId: "1", sentDate: Date(), kind: .text("How are you?")))
-        messages.append(Message(sender: sender2, messageId: "2", sentDate: Date(), kind: .text("Noldu?")))
-        messages.append(Message(sender: sender, messageId: "3", sentDate: Date(), kind: .text("Nasılsın")))
-        messages.append(Message(sender: sender2, messageId: "4", sentDate: Date(), kind: .text("İyiyim sen")))
+        messages.append(Message(sender: currentUser, messageId: "1", sentDate: Date(), kind: .text("How are you?")))
+        messages.append(Message(sender: otherUser, messageId: "2", sentDate: Date(), kind: .text("Noldu?")))
+        messages.append(Message(sender: currentUser, messageId: "3", sentDate: Date(), kind: .text("Nasılsın")))
+        messages.append(Message(sender: otherUser, messageId: "4", sentDate: Date(), kind: .text("İyiyim sen")))
         
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
@@ -130,7 +126,7 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
         }
     }
     
-    @objc func microphoneButtonTouchDown(_ sender: UIButton) {
+    @objc func leftMicrophoneButtonTouchDown(_ sender: UIButton) {
         if audioEngine.isRunning {
             audioEngine.stop()
             recognitionRequest?.endAudio()
@@ -140,11 +136,38 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
         }
     }
     
-    @objc func microphoneButtonTouchUp(_ sender: UIButton) {
+    @objc func leftMicrophoneButtonTouchUp(_ sender: UIButton) {
         if audioEngine.isRunning {
             stopRecording()
             leftMicrophoneButton.isEnabled = false
         }
+        
+        let message = Message(sender: otherUser, messageId: UUID().uuidString, sentDate: Date(), kind: .text(messageString))
+        messages.append(message)
+        messagesCollectionView.reloadData()
+        messagesCollectionView.scrollToLastItem()
+    }
+    
+    @objc func rightMicrophoneButtonTouchDown(_ sender: UIButton) {
+        if audioEngine.isRunning {
+            audioEngine.stop()
+            recognitionRequest?.endAudio()
+            leftMicrophoneButton.isEnabled = false
+        } else {
+            startRecording()
+        }
+    }
+    
+    @objc func rightMicrophoneButtonTouchUp(_ sender: UIButton) {
+        if audioEngine.isRunning {
+            stopRecording()
+            leftMicrophoneButton.isEnabled = false
+        }
+        
+        let message = Message(sender: currentUser, messageId: UUID().uuidString, sentDate: Date(), kind: .text(messageString))
+        messages.append(message)
+        messagesCollectionView.reloadData()
+        messagesCollectionView.scrollToLastItem()
     }
     
     func startRecording() {
@@ -176,6 +199,8 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
                 let speechResultText = result.bestTranscription.formattedString
                 
                 self.newLabel.text = speechResultText
+                self.messageString = speechResultText
+                
                 
                 APICaller().translateText(text: speechResultText, targetLanguage: "tr") { translatedText, error in
                     if let error = error {
@@ -185,9 +210,11 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
 //                            self.showTextLetterByLetter(text: translatedText)
 //                            self.convertedTextView.text = translatedText
                             // TODO: copy - paste
+                            
 //                            self.string = translatedText
                             // UIPasteboard.general.string = translatedText
                         }
+                        
                         print("Çeviri sonucu: \(translatedText)")
                     }
                 }
@@ -231,7 +258,7 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
 
 extension ConversationViewController: MessagesDataSource {
     var currentSender: SenderType {
-        return sender
+        return currentUser
     }
     
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
@@ -244,14 +271,22 @@ extension ConversationViewController: MessagesDataSource {
 }
 
 extension ConversationViewController: MessagesDisplayDelegate {
+    
     func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
-        
-        if message.sender.senderId == sender2.senderId {
+
+        if message.sender.senderId == otherUser.senderId {
             return UIColor(hexString: "FF865E")
         } else {
             return UIColor(hexString: "9685FF")
         }
     }
     
-    
+    func textColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
+        if message.sender.senderId == otherUser.senderId {
+            return .white
+        } else {
+            return .white
+        }
+    }
 }
+
