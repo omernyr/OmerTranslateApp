@@ -32,9 +32,13 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
     let currentUser = Sender(senderId: "any_unique_id", displayName: "Steven")
     let otherUser = Sender(senderId: "any_unique_id2", displayName: "Ali")
     
+    var leftBtnTapped: Bool? = nil
+    var rightBtnTapped: Bool? = nil
+    
     var messages: [MessageType] = []
     
-    private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US")) // Konuşma tanıma için kullanılacak dile göre ayarlayın
+    private let speechRecognizerTR = SFSpeechRecognizer(locale: Locale(identifier: "tr-TR")) // Konuşma tanıma için kullanılacak dile göre ayarlayın
+    private let speechRecognizerEN = SFSpeechRecognizer(locale: Locale(identifier: "en-US")) // Konuşma tanıma için kullanılacak dile göre ayarlayın
     private let audioEngine = AVAudioEngine()
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
@@ -129,6 +133,7 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
     }
     
     @objc func leftMicrophoneButtonTouchDown(_ sender: UIButton) {
+        leftBtnTapped = true
         if audioEngine.isRunning {
             audioEngine.stop()
             recognitionRequest?.endAudio()
@@ -144,13 +149,26 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
             leftMicrophoneButton.isEnabled = false
         }
         
-        let message = Message(sender: otherUser, messageId: UUID().uuidString, sentDate: Date(), kind: .text(messageString))
-        messages.append(message)
-        messagesCollectionView.reloadData()
-        messagesCollectionView.scrollToLastItem()
+        APICaller().translateText(text: messageString, fromLanguage: "tr", targetLanguage: "en") { translatedText, error in
+            if let error = error {
+                print("Çeviri hatası: \(error.localizedDescription)")
+            } else if let translatedText = translatedText {
+                
+                DispatchQueue.main.async {
+//                    self.messageString = translatedText
+                    let message = Message(sender: self.otherUser, messageId: UUID().uuidString, sentDate: Date(), kind: .text(translatedText))
+                    self.messages.append(message)
+                    self.messagesCollectionView.reloadData()
+                    self.messagesCollectionView.scrollToLastItem()
+                }
+                print("Çeviri sonucu: \(translatedText)")
+            }
+        }
+        
     }
     
     @objc func rightMicrophoneButtonTouchDown(_ sender: UIButton) {
+        rightBtnTapped = true
         if audioEngine.isRunning {
             audioEngine.stop()
             recognitionRequest?.endAudio()
@@ -166,10 +184,22 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
             leftMicrophoneButton.isEnabled = false
         }
         
-        let message = Message(sender: currentUser, messageId: UUID().uuidString, sentDate: Date(), kind: .text(messageString))
-        messages.append(message)
-        messagesCollectionView.reloadData()
-        messagesCollectionView.scrollToLastItem()
+        APICaller().translateText(text: messageString, fromLanguage: "en", targetLanguage: "tr") { translatedText, error in
+            if let error = error {
+                print("Çeviri hatası: \(error.localizedDescription)")
+            } else if let translatedText = translatedText {
+                
+                DispatchQueue.main.async {
+//                    self.messageString =
+                    let message = Message(sender: self.currentUser, messageId: UUID().uuidString, sentDate: Date(), kind: .text(translatedText))
+                    self.messages.append(message)
+                    self.messagesCollectionView.reloadData()
+                    self.messagesCollectionView.scrollToLastItem()
+                }
+                print("Çeviri sonucu: \(translatedText)")
+            }
+        }
+        
     }
     
     func startRecording() {
@@ -193,40 +223,51 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
         
         recognitionRequest.shouldReportPartialResults = true
         
-        recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest) { result, error in
-            var isFinal = false
-            
-            if let result = result {
-                let speechResultText = result.bestTranscription.formattedString
+        if leftBtnTapped == true {
+            recognitionTask = speechRecognizerTR?.recognitionTask(with: recognitionRequest) { result, error in
+                var isFinal = false
                 
-                self.newLabel.text = speechResultText
-//                self.messageString = speechResultText
-                
-                
-                
-                APICaller().translateText(text: speechResultText, fromLanguage: "en", targetLanguage: "tr") { translatedText, error in
-                    if let error = error {
-                        print("Çeviri hatası: \(error.localizedDescription)")
-                    } else if let translatedText = translatedText {
-                        
-                        DispatchQueue.main.async {
-                            self.messageString = translatedText
-                        }
-                        print("Çeviri sonucu: \(translatedText)")
-                    }
+                if let result = result {
+                    let speechResultText = result.bestTranscription.formattedString
+                    
+                    self.newLabel.text = speechResultText
+                    self.messageString = speechResultText
+                    
+                    isFinal = result.isFinal
                 }
                 
-                isFinal = result.isFinal
+                if error != nil || isFinal {
+                    self.audioEngine.stop()
+                    inputNode.removeTap(onBus: 0)
+                    
+                    self.recognitionRequest = nil
+                    self.recognitionTask = nil
+                    
+                    self.leftMicrophoneButton.isEnabled = true
+                }
             }
-            
-            if error != nil || isFinal {
-                self.audioEngine.stop()
-                inputNode.removeTap(onBus: 0)
+        } else if rightBtnTapped == true {
+            recognitionTask = speechRecognizerEN?.recognitionTask(with: recognitionRequest) { result, error in
+                var isFinal = false
                 
-                self.recognitionRequest = nil
-                self.recognitionTask = nil
+                if let result = result {
+                    let speechResultText = result.bestTranscription.formattedString
+                    
+                    self.newLabel.text = speechResultText
+                    self.messageString = speechResultText
+                    
+                    isFinal = result.isFinal
+                }
                 
-                self.leftMicrophoneButton.isEnabled = true
+                if error != nil || isFinal {
+                    self.audioEngine.stop()
+                    inputNode.removeTap(onBus: 0)
+                    
+                    self.recognitionRequest = nil
+                    self.recognitionTask = nil
+                    
+                    self.leftMicrophoneButton.isEnabled = true
+                }
             }
         }
         
