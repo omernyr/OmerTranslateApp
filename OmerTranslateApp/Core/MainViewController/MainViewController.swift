@@ -11,7 +11,7 @@ import Vision
 import AVFoundation
 import Speech
 
-class ViewController: UIViewController, SFSpeechRecognizerDelegate {
+class MainViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     //MARK: Speech
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US")) // Konuşma tanıma için kullanılacak dile göre ayarlayın
@@ -24,14 +24,6 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     private var string: String?
     private var strings: [String] = []
     private let imagePickerController = UIImagePickerController()
-    
-    private lazy var newVC: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "pencil"), for: .normal)
-        button.tintColor = .black
-        button.addTarget(self, action: #selector(goToNewVC), for: .touchUpInside)
-        return button
-    }()
     
     private lazy var nameAppLabel: UILabel = {
         let label = UILabel()
@@ -213,12 +205,6 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         present(vc, animated: true)
     }
     
-    @objc private func goToNewVC() {
-        let vc = NewViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
-    }
-    
     @objc func microphoneButtonTouchDown(_ sender: UIButton) {
         if audioEngine.isRunning {
             audioEngine.stop()
@@ -376,7 +362,6 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         view.addSubview(speakLabel)
         view.addSubview(cameraLabel)
         view.addSubview(nameAppLabel)
-        view.addSubview(newVC)
         resultBackView.addSubview(resultTextView)
         resultBackView.addSubview(editButton)
         convertedBackView.addSubview(copyPastebutton)
@@ -504,12 +489,6 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             make.bottom.equalTo(resultBackView.snp.top).offset(-20.0)
         }
         
-        newVC.snp.makeConstraints { make in
-            make.width.height.equalTo(80.0)
-            make.bottom.equalTo(nameAppLabel.snp.top).offset(20.0)
-            make.centerX.equalToSuperview()
-        }
-        
     }
     
     private func recognizeText(image: UIImage?) {
@@ -570,7 +549,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     }
 }
 
-extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension MainViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
@@ -592,7 +571,7 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
     
 }
 
-extension ViewController: UITextViewDelegate {
+extension MainViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         
