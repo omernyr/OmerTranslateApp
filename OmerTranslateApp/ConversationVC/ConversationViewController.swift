@@ -12,17 +12,17 @@ import AVFoundation
 import Speech
 import MessageKit
 
-//public struct Message: MessageType {
-//    public var sender: MessageKit.SenderType
-//    public var messageId: String
-//    public var sentDate: Date
-//    public var kind: MessageKind
-//}
-//
-//public struct Sender: SenderType {
-//    public let senderId: String
-//    public let displayName: String
-//}
+public struct Message: MessageType {
+    public var sender: MessageKit.SenderType
+    public var messageId: String
+    public var sentDate: Date
+    public var kind: MessageKind
+}
+
+public struct Sender: SenderType {
+    public let senderId: String
+    public let displayName: String
+}
 
 
 class ConversationViewController: MessagesViewController, MessagesLayoutDelegate {
@@ -66,10 +66,11 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
     
     private lazy var newLabel: UILabel = {
         let label = UILabel()
-        label.text = "result"
+        label.text = "Use the microphone and say something"
+        label.font = UIFont(name: "Gilroy-Medium", size: 21.0)
         label.textAlignment = .center
-        label.layer.borderWidth = 1.0
-        label.layer.borderColor = UIColor.black.cgColor
+        label.backgroundColor = UIColor(hexString: "FEF9EF")
+        label.layer.cornerRadius = 5.0
         return label
     }()
 
@@ -87,10 +88,8 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
     private func setupUI() {
         
         messageInputBar.isHidden = true
-        messages.append(Message(sender: currentUser, messageId: "1", sentDate: Date(), kind: .text("How are you?")))
-        messages.append(Message(sender: otherUser, messageId: "2", sentDate: Date(), kind: .text("Noldu?")))
-        messages.append(Message(sender: currentUser, messageId: "3", sentDate: Date(), kind: .text("Nasılsın")))
-        messages.append(Message(sender: otherUser, messageId: "4", sentDate: Date(), kind: .text("İyiyim sen")))
+        messages.append(Message(sender: currentUser, messageId: "1", sentDate: Date(), kind: .text("Say something you want translated 🐥")))
+        messages.append(Message(sender: otherUser, messageId: "2", sentDate: Date(), kind: .text("Mikrofana basılı tut ve kendini akışa bırak. 🐢")))
         
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
@@ -156,8 +155,11 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
                 
                 DispatchQueue.main.async {
 //                    self.messageString = translatedText
-                    let message = Message(sender: self.otherUser, messageId: UUID().uuidString, sentDate: Date(), kind: .text(translatedText))
-                    self.messages.append(message)
+                    if !translatedText.isEmpty {
+                        let message = Message(sender: self.otherUser, messageId: UUID().uuidString, sentDate: Date(), kind: .text(translatedText))
+                        self.messages.append(message)
+                    }
+                    
                     self.messagesCollectionView.reloadData()
                     self.messagesCollectionView.scrollToLastItem()
                 }
@@ -177,7 +179,7 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
             startRecording()
         }
     }
-    
+     
     @objc func rightMicrophoneButtonTouchUp(_ sender: UIButton) {
         if audioEngine.isRunning {
             stopRecording()
@@ -191,15 +193,18 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
                 
                 DispatchQueue.main.async {
 //                    self.messageString =
-                    let message = Message(sender: self.currentUser, messageId: UUID().uuidString, sentDate: Date(), kind: .text(translatedText))
-                    self.messages.append(message)
+                    if !translatedText.isEmpty {
+                        let message = Message(sender: self.currentUser, messageId: UUID().uuidString, sentDate: Date(), kind: .text(translatedText))
+                        self.messages.append(message)
+                    }
+                    
                     self.messagesCollectionView.reloadData()
                     self.messagesCollectionView.scrollToLastItem()
                 }
                 print("Çeviri sonucu: \(translatedText)")
             }
         }
-        
+         
     }
     
     func startRecording() {
@@ -306,7 +311,11 @@ extension ConversationViewController: MessagesDataSource {
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
         return messages[indexPath.section]
     }
+
+    
+    
 }
+                          
 
 extension ConversationViewController: MessagesDisplayDelegate {
     
@@ -325,6 +334,19 @@ extension ConversationViewController: MessagesDisplayDelegate {
         } else {
             return .white
         }
+    }
+    
+    func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+        
+        if message.sender.senderId == currentUser.senderId {
+            avatarView.initials = "🇺🇸"
+            avatarView.backgroundColor = UIColor(hexString: "9685FF")
+            
+        } else {
+            avatarView.initials = "🇹🇷"
+            avatarView.backgroundColor = UIColor(hexString: "FF865E")
+        }
+        
     }
     
 }
