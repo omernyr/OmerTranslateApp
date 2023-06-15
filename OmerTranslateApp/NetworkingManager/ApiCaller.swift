@@ -7,15 +7,11 @@
 
 import Foundation
 
-
 class APICaller {
     
     func translateText(text: String, fromLanguage: String, targetLanguage: String, completion: @escaping (String?, Error?) -> Void) {
-        let headers = [
-            "content-type": "application/json",
-            "X-RapidAPI-Key": "fe83b38e34mshc8c70c0d52b8a61p1ac627jsnbdb546853370",
-            "X-RapidAPI-Host": "microsoft-translator-text.p.rapidapi.com"
-        ]
+        
+        let apiHeaders = NetworkConstant.headers
         
         let parameters = [["Text": text]]
         
@@ -32,8 +28,8 @@ class APICaller {
         }
         
         var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.allHTTPHeaderFields = headers
+        request.httpMethod = NetworkConstant.postMethod
+        request.allHTTPHeaderFields = apiHeaders
         request.httpBody = postData
         
         let session = URLSession.shared
