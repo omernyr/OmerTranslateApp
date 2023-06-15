@@ -506,6 +506,8 @@ class MainViewController: UIViewController, SFSpeechRecognizerDelegate {
                 item.topCandidates(1).first?.string
             }.joined(separator: " ")
             
+            
+            
             DispatchQueue.main.async {
                 self.showTextLetterByLetter(text: text)
                 print("İngilizce -->> \(text)")

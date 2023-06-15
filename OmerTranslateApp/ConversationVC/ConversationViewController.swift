@@ -127,7 +127,7 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
         messagesCollectionView.snp.makeConstraints { make in
             make.width.equalToSuperview()
             make.top.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-250.0)
+            make.bottom.equalTo(view.snp.centerY).offset(20.0)
         }
     }
     
