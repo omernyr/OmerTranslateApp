@@ -43,6 +43,9 @@
 		5282EC562A36375C000F8B23 /* NetworkConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5282EC552A36375C000F8B23 /* NetworkConstant.swift */; };
 		5282EC582A363778000F8B23 /* ApiCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5282EC572A363778000F8B23 /* ApiCaller.swift */; };
 		52CBFA872A38738A00E8F2F7 /* Extension+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CBFA862A38738A00E8F2F7 /* Extension+UIButton.swift */; };
+		52F7D98F2A3B065300F63AA6 /* Extension+UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F7D98E2A3B065300F63AA6 /* Extension+UILabel.swift */; };
+		52F7D9932A3B322800F63AA6 /* ResultTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F7D9922A3B322800F63AA6 /* ResultTextView.swift */; };
+		52F7D9952A3B33F500F63AA6 /* ConvertedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F7D9942A3B33F500F63AA6 /* ConvertedTextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +85,9 @@
 		5282EC552A36375C000F8B23 /* NetworkConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstant.swift; sourceTree = "<group>"; };
 		5282EC572A363778000F8B23 /* ApiCaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiCaller.swift; sourceTree = "<group>"; };
 		52CBFA862A38738A00E8F2F7 /* Extension+UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIButton.swift"; sourceTree = "<group>"; };
+		52F7D98E2A3B065300F63AA6 /* Extension+UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UILabel.swift"; sourceTree = "<group>"; };
+		52F7D9922A3B322800F63AA6 /* ResultTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTextView.swift; sourceTree = "<group>"; };
+		52F7D9942A3B33F500F63AA6 /* ConvertedTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertedTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,15 +122,14 @@
 		5256B4542A34BC9500CB1927 /* OmerTranslateApp */ = {
 			isa = PBXGroup;
 			children = (
-				529C3A8B2A3A0AE000C952D1 /* Core */,
-				5282EC542A363747000F8B23 /* NetworkingManager */,
-				5282EC4F2A3630DB000F8B23 /* ConversationVC */,
+				52F7D98D2A3B05A900F63AA6 /* Resources */,
 				5256B46C2A34BD0E00CB1927 /* Extensions */,
+				5282EC542A363747000F8B23 /* NetworkingManager */,
+				52F7D9902A3B31A000F63AA6 /* Controllers */,
+				52F7D9912A3B31DE00F63AA6 /* View */,
 				5256B4552A34BC9500CB1927 /* AppDelegate.swift */,
 				5256B4572A34BC9500CB1927 /* SceneDelegate.swift */,
 				5256B45B2A34BC9500CB1927 /* Main.storyboard */,
-				5282EC202A3619B5000F8B23 /* gilroy */,
-				5256B45E2A34BC9600CB1927 /* Assets.xcassets */,
 				5256B4602A34BC9600CB1927 /* LaunchScreen.storyboard */,
 				5256B4632A34BC9600CB1927 /* Info.plist */,
 			);
@@ -136,11 +141,12 @@
 			children = (
 				5256B46D2A34BD1900CB1927 /* Extension+UIView.swift */,
 				52CBFA862A38738A00E8F2F7 /* Extension+UIButton.swift */,
+				52F7D98E2A3B065300F63AA6 /* Extension+UILabel.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		5282EC202A3619B5000F8B23 /* gilroy */ = {
+		5282EC202A3619B5000F8B23 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
 				5282EC212A3619B5000F8B23 /* Gilroy-UltraLightItalic.ttf */,
@@ -167,7 +173,7 @@
 				5282EC362A3619B5000F8B23 /* Help - Guide Document.pdf */,
 				5282EC372A3619B5000F8B23 /* Gilroy-Heavy.ttf */,
 			);
-			path = gilroy;
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		5282EC4F2A3630DB000F8B23 /* ConversationVC */ = {
@@ -187,20 +193,39 @@
 			path = NetworkingManager;
 			sourceTree = "<group>";
 		};
-		529C3A8B2A3A0AE000C952D1 /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				529C3A8C2A3A0AFC00C952D1 /* MainViewController */,
-			);
-			path = Core;
-			sourceTree = "<group>";
-		};
-		529C3A8C2A3A0AFC00C952D1 /* MainViewController */ = {
+		529C3A8C2A3A0AFC00C952D1 /* MainVC */ = {
 			isa = PBXGroup;
 			children = (
 				5256B4592A34BC9500CB1927 /* MainViewController.swift */,
 			);
-			path = MainViewController;
+			path = MainVC;
+			sourceTree = "<group>";
+		};
+		52F7D98D2A3B05A900F63AA6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5282EC202A3619B5000F8B23 /* Fonts */,
+				5256B45E2A34BC9600CB1927 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		52F7D9902A3B31A000F63AA6 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				529C3A8C2A3A0AFC00C952D1 /* MainVC */,
+				5282EC4F2A3630DB000F8B23 /* ConversationVC */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		52F7D9912A3B31DE00F63AA6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				52F7D9922A3B322800F63AA6 /* ResultTextView.swift */,
+				52F7D9942A3B33F500F63AA6 /* ConvertedTextView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -311,8 +336,11 @@
 				5256B46E2A34BD1900CB1927 /* Extension+UIView.swift in Sources */,
 				5282EC562A36375C000F8B23 /* NetworkConstant.swift in Sources */,
 				5256B4582A34BC9500CB1927 /* SceneDelegate.swift in Sources */,
+				52F7D9932A3B322800F63AA6 /* ResultTextView.swift in Sources */,
+				52F7D98F2A3B065300F63AA6 /* Extension+UILabel.swift in Sources */,
 				5282EC582A363778000F8B23 /* ApiCaller.swift in Sources */,
 				52CBFA872A38738A00E8F2F7 /* Extension+UIButton.swift in Sources */,
+				52F7D9952A3B33F500F63AA6 /* ConvertedTextView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
