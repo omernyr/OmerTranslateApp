@@ -47,28 +47,26 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
     private lazy var leftMicrophoneButton: UIButton = {
         let button = UIButton()
         button.buildButton(contentMode: .scaleAspectFit, tintColor: .white, cornerRadius: 40.0, imageViewString: "mic.fill")
-        button.addTarget(self, action: #selector(leftMicrophoneButtonTouchDown), for: .touchDown)
-        button.addTarget(self, action: #selector(leftMicrophoneButtonTouchUp), for: .touchUpInside)
         button.backgroundColor = UIColor(hexString: "FF865E")
         button.setPreferredSymbolConfiguration(.init(pointSize: 20.0, weight: .bold), forImageIn: .normal)
+        button.addTarget(self, action: #selector(leftMicrophoneButtonTouchDown), for: .touchDown)
+        button.addTarget(self, action: #selector(leftMicrophoneButtonTouchUp), for: .touchUpInside)
         return button
     }()
     
     private lazy var rightMicrophoneButton: UIButton = {
         let button = UIButton()
         button.buildButton(contentMode: .scaleAspectFit, tintColor: .white, cornerRadius: 40.0, imageViewString: "mic.fill")
-        button.addTarget(self, action: #selector(rightMicrophoneButtonTouchDown), for: .touchDown)
-        button.addTarget(self, action: #selector(rightMicrophoneButtonTouchUp), for: .touchUpInside)
         button.backgroundColor = UIColor(hexString: "9685FF")
         button.setPreferredSymbolConfiguration(.init(pointSize: 20.0, weight: .bold), forImageIn: .normal)
+        button.addTarget(self, action: #selector(rightMicrophoneButtonTouchDown), for: .touchDown)
+        button.addTarget(self, action: #selector(rightMicrophoneButtonTouchUp), for: .touchUpInside)
         return button
     }()
     
     private lazy var newLabel: UILabel = {
         let label = UILabel()
-        label.text = "Use the microphone and say something"
-        label.font = UIFont(name: "Gilroy-Medium", size: 21.0)
-        label.textAlignment = .center
+        label.buildLabel(text: "Use the microphone and say something", textColor: nil, fontName: "Gilroy-Medium", fontSize: 21.0, alignment: .center)
         label.backgroundColor = UIColor(hexString: "FEF9EF")
         label.layer.cornerRadius = 5.0
         return label
@@ -77,12 +75,7 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
         setupUI()
-    }
-    
-    @objc private func deleteBTN() {
-        print("delete")
     }
     
     private func setupUI() {
@@ -90,7 +83,6 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
         messageInputBar.isHidden = true
         messages.append(Message(sender: currentUser, messageId: "1", sentDate: Date(), kind: .text("Say something you want translated 🐥")))
         messages.append(Message(sender: otherUser, messageId: "2", sentDate: Date(), kind: .text("Mikrofana basılı tut ve kendini akışa bırak. 🐢")))
-        
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
