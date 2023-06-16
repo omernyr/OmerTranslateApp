@@ -20,47 +20,48 @@ class MainViewController: UIViewController, SFSpeechRecognizerDelegate {
     private var recognitionTask: SFSpeechRecognitionTask?
     private let audioSession = AVAudioSession.sharedInstance()
     
-    
     private var string: String?
-    private var strings: [String] = []
+    private var recentsTranslatedTexts: [String] = []
     private let imagePickerController = UIImagePickerController()
-    
+     
     private lazy var nameAppLabel: UILabel = {
         let label = UILabel()
-        label.buildLabel(text: "Quick translation", textColor: .black, fontName: "Gilroy-Medium", fontSize: 41.0, alignment: .center)
+        label.buildLabel(text: "Quick translation", textColor: .init(hexString: "#33272a"), fontName: "Gilroy-Medium", fontSize: 41.0, alignment: .center)
         label.numberOfLines = 0
         return label
     }()
     
     private lazy var conversationLabel: UILabel = {
         let label = UILabel()
-        label.buildLabel(text: "Conversation", textColor: .black, fontName: "Gilroy-Medium", fontSize: 15.0, alignment: .center)
+        label.buildLabel(text: "Conversation", textColor: .init(hexString: "#33272a"), fontName: "Gilroy-Medium", fontSize: 15.0, alignment: .center)
         return label
     }()
     
     private lazy var speakLabel: UILabel = {
         let label = UILabel()
-        label.buildLabel(text: "Speak", textColor: .black, fontName: "Gilroy-Medium", fontSize: 15.0, alignment: .center)
+        label.buildLabel(text: "Speak", textColor: .init(hexString: "#33272a"), fontName: "Gilroy-Medium", fontSize: 15.0, alignment: .center)
         return label
     }()
     
     private lazy var cameraLabel: UILabel = {
         let label = UILabel()
-        label.buildLabel(text: "Camera", textColor: .black, fontName: "Gilroy-Medium", fontSize: 15.0, alignment: .center)
+        label.buildLabel(text: "Camera", textColor: .init(hexString: "#33272a"), fontName: "Gilroy-Medium", fontSize: 15.0, alignment: .center)
         return label
     }()
     
     private let resultBackView: UIView = {
         let view = UIView()
-        view.layer.cornerRadius = 10.0
-        view.backgroundColor = UIColor(hexString: "FEF9EF")
+        view.layer.cornerRadius = 20.0
+        view.alpha = 0.3
+        view.backgroundColor = UIColor(hexString: "EEFDEE")
         return view
     }()
     
     private let convertedBackView: UIView = {
         let view = UIView()
-        view.layer.cornerRadius = 10.0
-        view.backgroundColor = UIColor(hexString: "FEF9EF")
+        view.layer.cornerRadius = 20.0
+        view.alpha = 0.3
+        view.backgroundColor = UIColor(hexString: "#EEFDEE")
         return view
     }()
     
@@ -76,8 +77,8 @@ class MainViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     private lazy var conversationButton: UIButton = {
         let button = UIButton()
-        button.buildButton(contentMode: .scaleAspectFit, tintColor: .white, cornerRadius: 40.0, imageViewString: "person.line.dotted.person.fill")
-        button.backgroundColor = UIColor(hexString: "A2D2FF")
+        button.buildButton(contentMode: .scaleAspectFit, tintColor: .init(hexString: "#33272a"), cornerRadius: 40.0, imageViewString: "person.line.dotted.person.fill")
+        button.backgroundColor = UIColor(hexString: "#ffabab")
         button.setPreferredSymbolConfiguration(.init(pointSize: 20.0, weight: .bold), forImageIn: .normal)
         button.addTarget(self, action: #selector(goToConversationVC), for: .touchUpInside)
         return button
@@ -85,8 +86,8 @@ class MainViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     private lazy var cameraImageButton: UIButton = {
         let button = UIButton()
-        button.buildButton(contentMode: .scaleAspectFit, tintColor: .white, cornerRadius: 40.0, imageViewString: "camera")
-        button.backgroundColor = UIColor(hexString: "9685FF")
+        button.buildButton(contentMode: .scaleAspectFit, tintColor: .init(hexString: "#33272a"), cornerRadius: 40.0, imageViewString: "camera")
+        button.backgroundColor = UIColor(hexString: "#d9abff")
         button.setPreferredSymbolConfiguration(.init(pointSize: 20.0, weight: .bold), forImageIn: .normal)
         button.addTarget(self, action: #selector(openCamera), for: .touchUpInside)
         return button
@@ -94,8 +95,8 @@ class MainViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     private lazy var microphoneButton: UIButton = {
         let button = UIButton()
-        button.buildButton(contentMode: .scaleAspectFit, tintColor: .white, cornerRadius: 55.0, imageViewString: "mic.fill")
-        button.backgroundColor = UIColor(hexString: "FF865E")
+        button.buildButton(contentMode: .scaleAspectFit, tintColor: .init(hexString: "#33272a"), cornerRadius: 55.0, imageViewString: "mic.fill")
+        button.backgroundColor = UIColor(hexString: "#abe4ff")
         button.setPreferredSymbolConfiguration(.init(pointSize: 20.0, weight: .bold), forImageIn: .normal)
         button.addTarget(self, action: #selector(microphoneButtonTouchDown), for: .touchDown)
         button.addTarget(self, action: #selector(microphoneButtonTouchUp), for: .touchUpInside)
@@ -104,15 +105,15 @@ class MainViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     private lazy var copyPastebutton: UIButton = {
         let button = UIButton()
-        button.buildButton(contentMode: .scaleAspectFit, tintColor: .black, cornerRadius: nil, imageViewString: "rectangle.portrait.on.rectangle.portrait")
-        button.addTarget(self, action: #selector(copyText), for: .touchUpInside)
+        button.buildButton(contentMode: .scaleAspectFit, tintColor: .init(hexString: "#33272a"), cornerRadius: nil, imageViewString: "rectangle.portrait.on.rectangle.portrait")
+        button.addTarget(self, action: #selector(handleLongPress), for: .touchUpInside)
         return button
     }()
     
     @objc private lazy var editButton: UIButton = {
         let button = UIButton()
-        button.buildButton(contentMode: nil, tintColor: .black, cornerRadius: nil, imageViewString: "square.and.pencil")
-        button.addTarget(self, action: #selector(editResult), for: .touchUpInside)
+        button.buildButton(contentMode: nil, tintColor: .init(hexString: "#33272a"), cornerRadius: nil, imageViewString: "square.and.pencil")
+//        button.addTarget(self, action: #selector(editResult), for: .touchUpInside)
         return button
     }()
     
@@ -121,10 +122,10 @@ class MainViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     private let translateButton: UIButton = {
         let button = UIButton()
-        button.buildButton(contentMode: .scaleToFill, tintColor: .secondaryLabel, cornerRadius: nil, imageViewString: "arrow.up.arrow.down")
+        button.buildButton(contentMode: .scaleToFill, tintColor: .init(hexString: "#33272a"), cornerRadius: nil, imageViewString: "arrow.up.arrow.down")
         button.setTitle("Translate to", for: .normal)
         button.backgroundColor = .clear
-        button.setTitleColor(.secondaryLabel, for: .normal)
+        button.setTitleColor(.init(hexString: "#33272a"), for: .normal)
         button.titleLabel?.font = UIFont(name: "Gilroy-Medium", size: 15.0) // Yazı boyutunu küçültmek için
         return button
     }()
@@ -163,12 +164,12 @@ class MainViewController: UIViewController, SFSpeechRecognizerDelegate {
         }
         
     }
-    @objc func lalo() {
-        print("lböfg")
-    }
     
     private func setupUI() {
-        view.backgroundColor = .systemBackground
+        let backImageView = UIImageView(frame: view.bounds)
+        backImageView.image = UIImage(named: "mesh2")
+        view.addSubview(backImageView)
+        view.sendSubviewToBack(backImageView)
         view.addSubview(imageView)
         view.addSubview(conversationButton)
         view.addSubview(cameraImageButton)
@@ -180,10 +181,10 @@ class MainViewController: UIViewController, SFSpeechRecognizerDelegate {
         view.addSubview(speakLabel)
         view.addSubview(cameraLabel)
         view.addSubview(nameAppLabel)
-        resultBackView.addSubview(resultTextView)
-        resultBackView.addSubview(editButton)
-        convertedBackView.addSubview(copyPastebutton)
-        convertedBackView.addSubview(convertedTextView)
+        view.addSubview(resultTextView)
+        view.addSubview(convertedTextView)
+        view.addSubview(editButton)
+        view.addSubview(copyPastebutton)
         
         resultTextView.delegate = self
         imagePickerController.delegate = self
@@ -216,11 +217,19 @@ class MainViewController: UIViewController, SFSpeechRecognizerDelegate {
             make.width.equalToSuperview()
             make.height.equalTo(110.0)
             make.centerX.equalToSuperview()
+            make.top.equalTo(resultBackView.snp.top)
+        }
+        
+        convertedTextView.snp.makeConstraints { make in
+            make.width.equalToSuperview()
+            make.height.equalTo(110.0)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(convertedBackView.snp.top)
         }
         
         editButton.snp.makeConstraints { make in
             make.bottom.equalTo(resultBackView.snp.bottom).inset(10.0)
-            make.right.equalToSuperview().inset(10.0)
+            make.right.equalToSuperview().offset(-30.0)
             make.width.equalTo(30.0)
             make.height.equalTo(30.0)
         }
@@ -231,15 +240,9 @@ class MainViewController: UIViewController, SFSpeechRecognizerDelegate {
             make.centerX.equalToSuperview()
         }
         
-        convertedTextView.snp.makeConstraints { make in
-            make.width.equalToSuperview()
-            make.height.equalTo(110.0)
-            make.centerX.equalToSuperview()
-        }
-        
         copyPastebutton.snp.makeConstraints { make in
             make.bottom.equalTo(convertedBackView.snp.bottom).inset(10.0)
-            make.right.equalToSuperview().inset(10.0)
+            make.right.equalToSuperview().offset(-30.0)
             make.width.equalTo(30.0)
             make.height.equalTo(30.0)
         }
@@ -286,7 +289,7 @@ class MainViewController: UIViewController, SFSpeechRecognizerDelegate {
             make.centerX.equalToSuperview()
             make.bottom.equalTo(resultBackView.snp.top).offset(-20.0)
         }
-        
+
     }
     
     @objc private func goToConversationVC() {
@@ -424,11 +427,7 @@ class MainViewController: UIViewController, SFSpeechRecognizerDelegate {
             // Gerekirse uygun bir bildirim gösterebilirsiniz
         }
     }
-    
-    @objc private func editResult() {
-        resultTextView.becomeFirstResponder() // Klavyeyi açar
-    }
-    
+
     @objc private func copyText() {
         UIPasteboard.general.string = string
     }
@@ -437,15 +436,10 @@ class MainViewController: UIViewController, SFSpeechRecognizerDelegate {
         imagePickerController.sourceType = .photoLibrary
         present(imagePickerController, animated: true, completion: nil)
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        self.view.endEditing(true) // Klavyeyi kapat
-    }
-    
+
     private func addGestureRecognizerToConvertedTextView() {
         let oneTapPressGesture = UITapGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
-        oneTapPressGesture.numberOfTapsRequired = 2
+        oneTapPressGesture.numberOfTapsRequired = 1
         convertedTextView.addGestureRecognizer(oneTapPressGesture)
     }
     
@@ -473,10 +467,7 @@ class MainViewController: UIViewController, SFSpeechRecognizerDelegate {
                 item.topCandidates(1).first?.string
             }.joined(separator: " ")
             
-            
-            
             DispatchQueue.main.async {
-                self.showTextLetterByLetter(text: text)
                 print("İngilizce -->> \(text)")
                 
                 APICaller().translateText(text: "\(text)", fromLanguage: "en", targetLanguage: "tr") { (translatedText, error) in
@@ -484,11 +475,9 @@ class MainViewController: UIViewController, SFSpeechRecognizerDelegate {
                         print("Çeviri hatası: \(error.localizedDescription)")
                     } else if let translatedText = translatedText {
                         DispatchQueue.main.async {
-                            //                            self.showTextLetterByLetter(text: translatedText)
-                            self.convertedTextView.text = translatedText
-                            // TODO: copy - paste
+                            self.showTextLetterByLetter(text: translatedText)
+                            //                            self.convertedTextView.text = translatedText
                             self.string = translatedText
-                            // UIPasteboard.general.string = translatedText
                         }
                         print("Çeviri sonucu: \(translatedText)")
                     }
@@ -509,7 +498,7 @@ class MainViewController: UIViewController, SFSpeechRecognizerDelegate {
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
             if index < text.count {
                 let character = text[text.index(text.startIndex, offsetBy: index)]
-                self.resultTextView.text.append(character)
+                self.convertedTextView.text.append(character)
                 index += 1
             } else {
                 timer.invalidate()
@@ -527,8 +516,6 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
             imageView.contentMode = .scaleAspectFit
             imageView.image = imageSelected
             imageView.layer.cornerRadius = 10.0
-            //            cancelButton.isHidden = false
-            //            addButton.isHidden = false
             recognizeText(image: imageSelected)
         }
         dismiss(animated: true, completion: nil)
@@ -566,13 +553,5 @@ extension MainViewController: UITextViewDelegate {
         }
         
     }
-    
-    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
-        return true
-    }
-    
-    func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
-        textView.resignFirstResponder() // Klavyeyi kapat
-        return true
-    }
+
 }

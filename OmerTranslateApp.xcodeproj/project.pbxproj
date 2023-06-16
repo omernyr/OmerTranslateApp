@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		520497A42A371F4100F6E110 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 520497A32A371F4100F6E110 /* MessageKit */; };
+		52492B1C2A3C86FE00EE40BA /* mesh2.png in Resources */ = {isa = PBXBuildFile; fileRef = 52492B1B2A3C86FE00EE40BA /* mesh2.png */; };
 		5256B4562A34BC9500CB1927 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5256B4552A34BC9500CB1927 /* AppDelegate.swift */; };
 		5256B4582A34BC9500CB1927 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5256B4572A34BC9500CB1927 /* SceneDelegate.swift */; };
 		5256B45A2A34BC9500CB1927 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5256B4592A34BC9500CB1927 /* MainViewController.swift */; };
@@ -46,9 +47,11 @@
 		52F7D98F2A3B065300F63AA6 /* Extension+UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F7D98E2A3B065300F63AA6 /* Extension+UILabel.swift */; };
 		52F7D9932A3B322800F63AA6 /* ResultTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F7D9922A3B322800F63AA6 /* ResultTextView.swift */; };
 		52F7D9952A3B33F500F63AA6 /* ConvertedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F7D9942A3B33F500F63AA6 /* ConvertedTextView.swift */; };
+		52F7D9972A3B6ACC00F63AA6 /* mesh-gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = 52F7D9962A3B6ACC00F63AA6 /* mesh-gradient.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		52492B1B2A3C86FE00EE40BA /* mesh2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mesh2.png; sourceTree = "<group>"; };
 		5256B4522A34BC9500CB1927 /* OmerTranslateApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OmerTranslateApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5256B4552A34BC9500CB1927 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5256B4572A34BC9500CB1927 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +91,7 @@
 		52F7D98E2A3B065300F63AA6 /* Extension+UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UILabel.swift"; sourceTree = "<group>"; };
 		52F7D9922A3B322800F63AA6 /* ResultTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTextView.swift; sourceTree = "<group>"; };
 		52F7D9942A3B33F500F63AA6 /* ConvertedTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertedTextView.swift; sourceTree = "<group>"; };
+		52F7D9962A3B6ACC00F63AA6 /* mesh-gradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mesh-gradient.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +184,8 @@
 			isa = PBXGroup;
 			children = (
 				5282EC522A3631F2000F8B23 /* ConversationViewController.swift */,
+				52492B1B2A3C86FE00EE40BA /* mesh2.png */,
+				52F7D9962A3B6ACC00F63AA6 /* mesh-gradient.png */,
 			);
 			path = ConversationVC;
 			sourceTree = "<group>";
@@ -309,6 +315,7 @@
 				5282EC442A3619B5000F8B23 /* Gilroy-ExtraBold.ttf in Resources */,
 				5282EC4B2A3619B5000F8B23 /* More Free Fonts on fontshmonts.com.url in Resources */,
 				5282EC3B2A3619B5000F8B23 /* Gilroy-ThinItalic.ttf in Resources */,
+				52492B1C2A3C86FE00EE40BA /* mesh2.png in Resources */,
 				5282EC472A3619B5000F8B23 /* Gilroy-Thin.ttf in Resources */,
 				5282EC482A3619B5000F8B23 /* Gilroy-ExtraBoldItalic.ttf in Resources */,
 				5282EC392A3619B5000F8B23 /* Gilroy-Medium.ttf in Resources */,
@@ -318,6 +325,7 @@
 				5256B45D2A34BC9500CB1927 /* Main.storyboard in Resources */,
 				5282EC4C2A3619B5000F8B23 /* License.txt in Resources */,
 				5282EC462A3619B5000F8B23 /* Gilroy-Light.ttf in Resources */,
+				52F7D9972A3B6ACC00F63AA6 /* mesh-gradient.png in Resources */,
 				5282EC3A2A3619B5000F8B23 /* Gilroy-LightItalic.ttf in Resources */,
 				5282EC3D2A3619B5000F8B23 /* Gilroy-BoldItalic.ttf in Resources */,
 			);
