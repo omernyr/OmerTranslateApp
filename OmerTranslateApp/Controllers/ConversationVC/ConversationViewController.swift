@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import Vision
 import AVFoundation
 import Speech
 import MessageKit
@@ -47,7 +46,7 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
     private lazy var leftMicrophoneButton: UIButton = {
         let button = UIButton()
         button.buildButton(contentMode: .scaleAspectFit, tintColor: .white, cornerRadius: 40.0, imageViewString: "mic.fill")
-        button.backgroundColor = UIColor(hexString: "FF865E")
+        button.backgroundColor = UIColor(hexString: "#fc8e5b")
         button.setPreferredSymbolConfiguration(.init(pointSize: 20.0, weight: .bold), forImageIn: .normal)
         button.addTarget(self, action: #selector(leftMicrophoneButtonTouchDown), for: .touchDown)
         button.addTarget(self, action: #selector(leftMicrophoneButtonTouchUp), for: .touchUpInside)
@@ -57,7 +56,7 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
     private lazy var rightMicrophoneButton: UIButton = {
         let button = UIButton()
         button.buildButton(contentMode: .scaleAspectFit, tintColor: .white, cornerRadius: 40.0, imageViewString: "mic.fill")
-        button.backgroundColor = UIColor(hexString: "9685FF")
+        button.backgroundColor = UIColor(hexString: "d9abff")
         button.setPreferredSymbolConfiguration(.init(pointSize: 20.0, weight: .bold), forImageIn: .normal)
         button.addTarget(self, action: #selector(rightMicrophoneButtonTouchDown), for: .touchDown)
         button.addTarget(self, action: #selector(rightMicrophoneButtonTouchUp), for: .touchUpInside)
@@ -66,8 +65,8 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
     
     private lazy var newLabel: UILabel = {
         let label = UILabel()
-        label.buildLabel(text: "Use the microphone and say something", textColor: nil, fontName: "Gilroy-Medium", fontSize: 21.0, alignment: .center)
-        label.backgroundColor = UIColor(hexString: "FEF9EF")
+        label.buildLabel(text: "Use microphone and say something", textColor: nil, fontName: "Gilroy-Medium", fontSize: 21.0, alignment: .center)
+        label.backgroundColor = UIColor(hexString: "ddffab")
         label.layer.cornerRadius = 5.0
         return label
     }()
@@ -314,9 +313,9 @@ extension ConversationViewController: MessagesDisplayDelegate {
     func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
 
         if message.sender.senderId == otherUser.senderId {
-            return UIColor(hexString: "FF865E")
+            return UIColor(hexString: "#fc8e5b")
         } else {
-            return UIColor(hexString: "9685FF")
+            return UIColor(hexString: "#d9abff")
         }
     }
     
@@ -332,11 +331,11 @@ extension ConversationViewController: MessagesDisplayDelegate {
         
         if message.sender.senderId == currentUser.senderId {
             avatarView.initials = "🇺🇸"
-            avatarView.backgroundColor = UIColor(hexString: "9685FF")
+            avatarView.backgroundColor = UIColor(hexString: "#d9abff")
             
         } else {
             avatarView.initials = "🇹🇷"
-            avatarView.backgroundColor = UIColor(hexString: "FF865E")
+            avatarView.backgroundColor = UIColor(hexString: "#fc8e5b")
         }
         
     }
