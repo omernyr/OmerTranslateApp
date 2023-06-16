@@ -8,7 +8,7 @@
 import UIKit
 
 class ConvertedTextView: UITextView {
-
+    
     override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
         setupTextView()
@@ -17,18 +17,14 @@ class ConvertedTextView: UITextView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupTextView()
-        
     }
-
+    
     private func setupTextView() {
-        
-       self.font = UIFont(name: "Gilroy-Medium", size: 19.0)
-       self.layer.cornerRadius = 10.0
-       self.textColor = .black
-       self.textAlignment = .center
-       self.backgroundColor = UIColor(hexString: "FEF9EF")
+        self.text = "Go beyond to limits"
+        self.font = UIFont(name: "Gilroy-Medium", size: 19.0)
+        self.layer.cornerRadius = 20.0
+        self.textColor = .init(hexString: "#33272a")
+        self.textAlignment = .center
+        self.backgroundColor = .clear
     }
-    
-    
-
 }
