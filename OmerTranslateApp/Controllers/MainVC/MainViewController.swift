@@ -51,16 +51,28 @@ class MainViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     private let resultBackView: UIView = {
         let view = UIView()
+        let shadowLayer = view.layer
+        shadowLayer.shadowColor = UIColor.black.cgColor // Gölge rengi
+        shadowLayer.shadowOpacity = 0.5 // Gölge opaklığı
+        shadowLayer.shadowOffset = CGSize(width: 2, height: 2) // Gölge konumu
+        shadowLayer.shadowRadius = 4 // Gölge yarıçapı
+        view.clipsToBounds = false
         view.layer.cornerRadius = 20.0
-        view.alpha = 0.3
+        view.alpha = 0.2
         view.backgroundColor = UIColor(hexString: "EEFDEE")
         return view
     }()
     
     private let convertedBackView: UIView = {
         let view = UIView()
+        let shadowLayer = view.layer
+        shadowLayer.shadowColor = UIColor.black.cgColor // Gölge rengi
+        shadowLayer.shadowOpacity = 0.5 // Gölge opaklığı
+        shadowLayer.shadowOffset = CGSize(width: 2, height: 2) // Gölge konumu
+        shadowLayer.shadowRadius = 4 // Gölge yarıçapı
+        view.clipsToBounds = false
         view.layer.cornerRadius = 20.0
-        view.alpha = 0.3
+        view.alpha = 0.2
         view.backgroundColor = UIColor(hexString: "#EEFDEE")
         return view
     }()
@@ -77,6 +89,12 @@ class MainViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     private lazy var conversationButton: UIButton = {
         let button = UIButton()
+        let shadowLayer = button.layer
+        shadowLayer.shadowColor = UIColor.black.cgColor // Gölge rengi
+        shadowLayer.shadowOpacity = 0.5 // Gölge opaklığı
+        shadowLayer.shadowOffset = CGSize(width: 1, height: 1) // Gölge konumu
+        shadowLayer.shadowRadius = 4 // Gölge yarıçapı
+        button.clipsToBounds = false
         button.buildButton(contentMode: .scaleAspectFit, tintColor: .init(hexString: "#33272a"), cornerRadius: 40.0, imageViewString: "person.line.dotted.person.fill")
         button.backgroundColor = UIColor(hexString: "#ffabab")
         button.setPreferredSymbolConfiguration(.init(pointSize: 20.0, weight: .bold), forImageIn: .normal)
@@ -86,6 +104,12 @@ class MainViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     private lazy var cameraImageButton: UIButton = {
         let button = UIButton()
+        let shadowLayer = button.layer
+        shadowLayer.shadowColor = UIColor.black.cgColor // Gölge rengi
+        shadowLayer.shadowOpacity = 0.5 // Gölge opaklığı
+        shadowLayer.shadowOffset = CGSize(width: 1, height: 1) // Gölge konumu
+        shadowLayer.shadowRadius = 4 // Gölge yarıçapı
+        button.clipsToBounds = false
         button.buildButton(contentMode: .scaleAspectFit, tintColor: .init(hexString: "#33272a"), cornerRadius: 40.0, imageViewString: "camera")
         button.backgroundColor = UIColor(hexString: "#d9abff")
         button.setPreferredSymbolConfiguration(.init(pointSize: 20.0, weight: .bold), forImageIn: .normal)
@@ -95,6 +119,12 @@ class MainViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     private lazy var microphoneButton: UIButton = {
         let button = UIButton()
+        let shadowLayer = button.layer
+        shadowLayer.shadowColor = UIColor.black.cgColor // Gölge rengi
+        shadowLayer.shadowOpacity = 0.5 // Gölge opaklığı
+        shadowLayer.shadowOffset = CGSize(width: 1, height: 1) // Gölge konumu
+        shadowLayer.shadowRadius = 4 // Gölge yarıçapı
+        button.clipsToBounds = false
         button.buildButton(contentMode: .scaleAspectFit, tintColor: .init(hexString: "#33272a"), cornerRadius: 55.0, imageViewString: "mic.fill")
         button.backgroundColor = UIColor(hexString: "#abe4ff")
         button.setPreferredSymbolConfiguration(.init(pointSize: 20.0, weight: .bold), forImageIn: .normal)
@@ -133,7 +163,6 @@ class MainViewController: UIViewController, SFSpeechRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        
         SFSpeechRecognizer.requestAuthorization { authStatus in
             var isEnabled = false
             
@@ -162,7 +191,6 @@ class MainViewController: UIViewController, SFSpeechRecognizerDelegate {
                 self.microphoneButton.isEnabled = isEnabled
             }
         }
-        
     }
     
     private func setupUI() {
@@ -195,6 +223,13 @@ class MainViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     private func configureConstraints() {
         
+        nameAppLabel.snp.makeConstraints { make in
+            make.width.equalToSuperview().inset(50.0)
+            //            make.height.equalTo(80.0)
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(resultBackView.snp.top).offset(-20.0)
+        }
+        
         conversationButton.snp.makeConstraints { make in
             make.width.height.equalTo(80.0)
             make.bottom.equalToSuperview().inset(90.0)
@@ -211,55 +246,6 @@ class MainViewController: UIViewController, SFSpeechRecognizerDelegate {
             make.width.height.equalTo(110.0)
             make.centerY.equalTo(cameraImageButton.snp.centerY)
             make.centerX.equalToSuperview()
-        }
-        
-        resultTextView.snp.makeConstraints { make in
-            make.width.equalToSuperview()
-            make.height.equalTo(110.0)
-            make.centerX.equalToSuperview()
-            make.top.equalTo(resultBackView.snp.top)
-        }
-        
-        convertedTextView.snp.makeConstraints { make in
-            make.width.equalToSuperview()
-            make.height.equalTo(110.0)
-            make.centerX.equalToSuperview()
-            make.top.equalTo(convertedBackView.snp.top)
-        }
-        
-        editButton.snp.makeConstraints { make in
-            make.bottom.equalTo(resultBackView.snp.bottom).inset(10.0)
-            make.right.equalToSuperview().offset(-30.0)
-            make.width.equalTo(30.0)
-            make.height.equalTo(30.0)
-        }
-        
-        resultBackView.snp.makeConstraints { make in
-            make.width.equalToSuperview().inset(20.0)
-            make.height.equalTo(150.0)
-            make.centerX.equalToSuperview()
-        }
-        
-        copyPastebutton.snp.makeConstraints { make in
-            make.bottom.equalTo(convertedBackView.snp.bottom).inset(10.0)
-            make.right.equalToSuperview().offset(-30.0)
-            make.width.equalTo(30.0)
-            make.height.equalTo(30.0)
-        }
-        
-        convertedBackView.snp.makeConstraints { make in
-            make.width.equalToSuperview().inset(20.0)
-            make.height.equalTo(150.0)
-            make.centerX.equalToSuperview()
-            make.top.equalTo(translateButton.snp.bottom).offset(10.0)
-            make.bottom.equalTo(microphoneButton.snp.top).offset(-50.0)
-        }
-        
-        translateButton.snp.makeConstraints { make in
-            make.width.equalTo(200.0)
-            make.height.equalTo(30.0)
-            make.centerX.equalToSuperview()
-            make.top.equalTo(resultBackView.snp.bottom).offset(10.0)
         }
         
         conversationLabel.snp.makeConstraints { make in
@@ -283,13 +269,55 @@ class MainViewController: UIViewController, SFSpeechRecognizerDelegate {
             make.top.equalTo(cameraImageButton.snp.bottom).offset(5.0)
         }
         
-        nameAppLabel.snp.makeConstraints { make in
-            make.width.equalToSuperview().inset(50.0)
-            //            make.height.equalTo(80.0)
-            make.centerX.equalToSuperview()
-            make.bottom.equalTo(resultBackView.snp.top).offset(-20.0)
+        editButton.snp.makeConstraints { make in
+            make.bottom.equalTo(resultBackView.snp.bottom).inset(10.0)
+            make.right.equalToSuperview().offset(-30.0)
+            make.width.equalTo(30.0)
+            make.height.equalTo(30.0)
         }
-
+        
+        copyPastebutton.snp.makeConstraints { make in
+            make.bottom.equalTo(convertedBackView.snp.bottom).inset(10.0)
+            make.right.equalToSuperview().offset(-30.0)
+            make.width.equalTo(30.0)
+            make.height.equalTo(30.0)
+        }
+        
+        resultTextView.snp.makeConstraints { make in
+            make.width.equalToSuperview()
+            make.height.equalTo(150.0)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(resultBackView.snp.top)
+        }
+        
+        convertedTextView.snp.makeConstraints { make in
+            make.width.equalToSuperview()
+            make.height.equalTo(150.0)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(convertedBackView.snp.top)
+        }
+        
+        resultBackView.snp.makeConstraints { make in
+            make.width.equalToSuperview().inset(20.0)
+            make.height.equalTo(190.0)
+            make.centerX.equalToSuperview()
+        }
+        
+        convertedBackView.snp.makeConstraints { make in
+            make.width.equalToSuperview().inset(20.0)
+            make.height.equalTo(190.0)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(translateButton.snp.bottom).offset(10.0)
+            make.bottom.equalTo(microphoneButton.snp.top).offset(-50.0)
+        }
+        
+        translateButton.snp.makeConstraints { make in
+            make.width.equalTo(200.0)
+            make.height.equalTo(30.0)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(resultBackView.snp.bottom).offset(10.0)
+        }
+            
     }
     
     @objc private func goToConversationVC() {

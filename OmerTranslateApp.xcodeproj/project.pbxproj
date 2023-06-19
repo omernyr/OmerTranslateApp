@@ -12,7 +12,6 @@
 		5256B4562A34BC9500CB1927 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5256B4552A34BC9500CB1927 /* AppDelegate.swift */; };
 		5256B4582A34BC9500CB1927 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5256B4572A34BC9500CB1927 /* SceneDelegate.swift */; };
 		5256B45A2A34BC9500CB1927 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5256B4592A34BC9500CB1927 /* MainViewController.swift */; };
-		5256B45D2A34BC9500CB1927 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5256B45B2A34BC9500CB1927 /* Main.storyboard */; };
 		5256B45F2A34BC9600CB1927 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5256B45E2A34BC9600CB1927 /* Assets.xcassets */; };
 		5256B4622A34BC9600CB1927 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5256B4602A34BC9600CB1927 /* LaunchScreen.storyboard */; };
 		5256B46B2A34BD0400CB1927 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5256B46A2A34BD0400CB1927 /* SnapKit */; };
@@ -52,11 +51,10 @@
 
 /* Begin PBXFileReference section */
 		52492B1B2A3C86FE00EE40BA /* mesh2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mesh2.png; sourceTree = "<group>"; };
-		5256B4522A34BC9500CB1927 /* OmerTranslateApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OmerTranslateApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5256B4522A34BC9500CB1927 /* TalkLing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TalkLing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5256B4552A34BC9500CB1927 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5256B4572A34BC9500CB1927 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5256B4592A34BC9500CB1927 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		5256B45C2A34BC9500CB1927 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5256B45E2A34BC9600CB1927 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5256B4612A34BC9600CB1927 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5256B4632A34BC9600CB1927 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -118,7 +116,7 @@
 		5256B4532A34BC9500CB1927 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5256B4522A34BC9500CB1927 /* OmerTranslateApp.app */,
+				5256B4522A34BC9500CB1927 /* TalkLing.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -133,8 +131,6 @@
 				52F7D9912A3B31DE00F63AA6 /* View */,
 				5256B4552A34BC9500CB1927 /* AppDelegate.swift */,
 				5256B4572A34BC9500CB1927 /* SceneDelegate.swift */,
-				5256B45B2A34BC9500CB1927 /* Main.storyboard */,
-				5256B4602A34BC9600CB1927 /* LaunchScreen.storyboard */,
 				5256B4632A34BC9600CB1927 /* Info.plist */,
 			);
 			path = OmerTranslateApp;
@@ -228,6 +224,7 @@
 		52F7D9912A3B31DE00F63AA6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5256B4602A34BC9600CB1927 /* LaunchScreen.storyboard */,
 				52F7D9922A3B322800F63AA6 /* ResultTextView.swift */,
 				52F7D9942A3B33F500F63AA6 /* ConvertedTextView.swift */,
 			);
@@ -237,9 +234,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5256B4512A34BC9500CB1927 /* OmerTranslateApp */ = {
+		5256B4512A34BC9500CB1927 /* TalkLing */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5256B4662A34BC9600CB1927 /* Build configuration list for PBXNativeTarget "OmerTranslateApp" */;
+			buildConfigurationList = 5256B4662A34BC9600CB1927 /* Build configuration list for PBXNativeTarget "TalkLing" */;
 			buildPhases = (
 				5256B44E2A34BC9500CB1927 /* Sources */,
 				5256B44F2A34BC9500CB1927 /* Frameworks */,
@@ -249,13 +246,13 @@
 			);
 			dependencies = (
 			);
-			name = OmerTranslateApp;
+			name = TalkLing;
 			packageProductDependencies = (
 				5256B46A2A34BD0400CB1927 /* SnapKit */,
 				520497A32A371F4100F6E110 /* MessageKit */,
 			);
 			productName = OmerTranslateApp;
-			productReference = 5256B4522A34BC9500CB1927 /* OmerTranslateApp.app */;
+			productReference = 5256B4522A34BC9500CB1927 /* TalkLing.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -290,7 +287,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5256B4512A34BC9500CB1927 /* OmerTranslateApp */,
+				5256B4512A34BC9500CB1927 /* TalkLing */,
 			);
 		};
 /* End PBXProject section */
@@ -322,7 +319,6 @@
 				5256B45F2A34BC9600CB1927 /* Assets.xcassets in Resources */,
 				5282EC3F2A3619B5000F8B23 /* Gilroy-RegularItalic.ttf in Resources */,
 				5282EC4D2A3619B5000F8B23 /* Help - Guide Document.pdf in Resources */,
-				5256B45D2A34BC9500CB1927 /* Main.storyboard in Resources */,
 				5282EC4C2A3619B5000F8B23 /* License.txt in Resources */,
 				5282EC462A3619B5000F8B23 /* Gilroy-Light.ttf in Resources */,
 				52F7D9972A3B6ACC00F63AA6 /* mesh-gradient.png in Resources */,
@@ -355,14 +351,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		5256B45B2A34BC9500CB1927 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5256B45C2A34BC9500CB1927 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		5256B4602A34BC9600CB1927 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -491,16 +479,18 @@
 		5256B4672A34BC9600CB1927 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon2;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M84T2Z2B4Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OmerTranslateApp/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Required for the camera info.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Required for the microphone info.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Required for the speech info.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -523,16 +513,18 @@
 		5256B4682A34BC9600CB1927 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon2;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M84T2Z2B4Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OmerTranslateApp/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Required for the camera info.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Required for the microphone info.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Required for the speech info.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -564,7 +556,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5256B4662A34BC9600CB1927 /* Build configuration list for PBXNativeTarget "OmerTranslateApp" */ = {
+		5256B4662A34BC9600CB1927 /* Build configuration list for PBXNativeTarget "TalkLing" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5256B4672A34BC9600CB1927 /* Debug */,

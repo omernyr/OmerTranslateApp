@@ -45,7 +45,13 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
     
     private lazy var leftMicrophoneButton: UIButton = {
         let button = UIButton()
-        button.buildButton(contentMode: .scaleAspectFit, tintColor: .white, cornerRadius: 40.0, imageViewString: "mic.fill")
+        let shadowLayer = button.layer
+        shadowLayer.shadowColor = UIColor.black.cgColor // Gölge rengi
+        shadowLayer.shadowOpacity = 0.5 // Gölge opaklığı
+        shadowLayer.shadowOffset = CGSize(width: 1, height: 1) // Gölge konumu
+        shadowLayer.shadowRadius = 4 // Gölge yarıçapı
+        button.clipsToBounds = false
+        button.buildButton(contentMode: .scaleAspectFit, tintColor: .init(hexString: "#33272a"), cornerRadius: 40.0, imageViewString: "mic.fill")
         button.backgroundColor = UIColor(hexString: "#fc8e5b")
         button.setPreferredSymbolConfiguration(.init(pointSize: 20.0, weight: .bold), forImageIn: .normal)
         button.addTarget(self, action: #selector(leftMicrophoneButtonTouchDown), for: .touchDown)
@@ -55,7 +61,13 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
     
     private lazy var rightMicrophoneButton: UIButton = {
         let button = UIButton()
-        button.buildButton(contentMode: .scaleAspectFit, tintColor: .white, cornerRadius: 40.0, imageViewString: "mic.fill")
+        let shadowLayer = button.layer
+        shadowLayer.shadowColor = UIColor.black.cgColor // Gölge rengi
+        shadowLayer.shadowOpacity = 0.5 // Gölge opaklığı
+        shadowLayer.shadowOffset = CGSize(width: 1, height: 1) // Gölge konumu
+        shadowLayer.shadowRadius = 4 // Gölge yarıçapı
+        button.clipsToBounds = false
+        button.buildButton(contentMode: .scaleAspectFit, tintColor: .init(hexString: "#33272a"), cornerRadius: 40.0, imageViewString: "mic.fill")
         button.backgroundColor = UIColor(hexString: "d9abff")
         button.setPreferredSymbolConfiguration(.init(pointSize: 20.0, weight: .bold), forImageIn: .normal)
         button.addTarget(self, action: #selector(rightMicrophoneButtonTouchDown), for: .touchDown)
@@ -65,9 +77,16 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
     
     private lazy var newLabel: UILabel = {
         let label = UILabel()
+        let shadowLayer = label.layer
+        shadowLayer.shadowColor = UIColor.black.cgColor // Gölge rengi
+        shadowLayer.shadowOpacity = 0.5 // Gölge opaklığı
+        shadowLayer.shadowOffset = CGSize(width: 1, height: 1) // Gölge konumu
+        shadowLayer.shadowRadius = 4 // Gölge yarıçapı
+        label.clipsToBounds = false
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.buildLabel(text: "Use microphone and say something", textColor: nil, fontName: "Gilroy-Medium", fontSize: 21.0, alignment: .center)
         label.backgroundColor = UIColor(hexString: "ddffab")
-        label.layer.cornerRadius = 5.0
+        label.layer.cornerRadius = 10.0
         return label
     }()
 
@@ -109,7 +128,7 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
         }
         
         newLabel.snp.makeConstraints { make in
-            make.width.equalToSuperview().inset(10.0)
+            make.width.equalToSuperview().inset(20.0)
             make.height.equalTo(50.0)
             make.bottom.equalTo(rightMicrophoneButton.snp.top).offset(-20.0)
             make.centerX.equalToSuperview()
@@ -287,7 +306,7 @@ class ConversationViewController: MessagesViewController, MessagesLayoutDelegate
         audioEngine.stop()
         recognitionRequest?.endAudio()
     }
-    
+
 }
 
 extension ConversationViewController: MessagesDataSource {
@@ -303,11 +322,8 @@ extension ConversationViewController: MessagesDataSource {
         return messages[indexPath.section]
     }
 
-    
-    
 }
-                          
-
+                        
 extension ConversationViewController: MessagesDisplayDelegate {
     
     func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
@@ -320,11 +336,9 @@ extension ConversationViewController: MessagesDisplayDelegate {
     }
     
     func textColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
-        if message.sender.senderId == otherUser.senderId {
-            return .white
-        } else {
-            return .white
-        }
+
+        return .init(hexString: "#33272a")
+        
     }
     
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {

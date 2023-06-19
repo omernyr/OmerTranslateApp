@@ -20,7 +20,7 @@ class ResultTextView: UITextView {
     }
     
     private func setupTextView() {
-        self.text = "Sınırların ötesine geç"
+        self.text = "Go beyond to limits"
         self.font = UIFont(name: "Gilroy-Medium", size: 19.0)
         self.layer.cornerRadius = 20.0
         self.textColor = .init(hexString: "#33272a")

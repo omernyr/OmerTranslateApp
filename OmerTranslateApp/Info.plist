@@ -7,12 +7,6 @@
 		<string>Gilroy-Light.ttf</string>
 		<string>Gilroy-Medium.ttf</string>
 	</array>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Required for the microphone info.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Required for the camera info.</string>
-	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>Required for the speech info.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -26,8 +20,6 @@
 					<string>Default Configuration</string>
 					<key>UISceneDelegateClassName</key>
 					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
-					<key>UISceneStoryboardFile</key>
-					<string>Main</string>
 				</dict>
 			</array>
 		</dict>
